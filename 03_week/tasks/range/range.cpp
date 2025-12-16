@@ -6,9 +6,7 @@ std::vector<int> Range(int from, int to, const int step = 1) {
     std::vector<int> result{};
     result.reserve(std::abs(from - to));
 
-    bool is_to_from = from > to && step < 0;
-    bool is_from_to = from < to && step > 0;
-    while (is_from_to || is_to_from) {
+    while ((from > to && step < 0) || (from < to && step > 0)) {
         result.push_back(from);
         from += step;
     }
