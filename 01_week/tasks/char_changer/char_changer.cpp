@@ -3,8 +3,8 @@
 
 
 size_t CharChanger(char array[], size_t size, char delimiter = ' ') {
-    // k - указатель для массива array без дубликатов
-    size_t k = 0;
+    // pos - позиция в массиве array без дубликатов
+    size_t pos = 0;
 
     // size - размер массива с учётом '\0' в конце
     for (size_t i = 0; i < size - 1; ++i) {
@@ -14,19 +14,19 @@ size_t CharChanger(char array[], size_t size, char delimiter = ' ') {
 
         // определяем тип замены
         if (isdigit(old_symbol)) {
-            array[k++] = '*';
+            array[pos++] = '*';
         }
         else if (old_symbol == ' ') {
-            array[k++] = delimiter;
+            array[pos++] = delimiter;
         }
         else if (islower(old_symbol)) {
-            array[k++] = toupper(old_symbol);
+            array[pos++] = toupper(old_symbol);
         }
         else if (isupper(old_symbol)) {
-            array[k++] = old_symbol;
+            array[pos++] = old_symbol;
         }
         else {
-            array[k++] = '_';
+            array[pos++] = '_';
         }
 
         // поиск и подсчёт дубликатов
@@ -42,12 +42,12 @@ size_t CharChanger(char array[], size_t size, char delimiter = ' ') {
 
             // добавляем счётчик после повторяющегося символа (кроме ' ')
             if (old_symbol != ' ')
-                array[k++] = duplicates + 1 >= 10 ? '0' : duplicates + 1 + '0';
+                array[pos++] = duplicates + 1 >= 10 ? '0' : duplicates + 1 + '0';
         }
     }
 
     // устанавливаем новый конец массива
-    array[k] = '\0';
+    array[pos] = '\0';
 
-    return k;
+    return pos;
 }
