@@ -4,17 +4,13 @@
 
 
 void SolveQuadratic(int a, int b, int c) {
-    double a_db = static_cast<double>(a);
-    double b_db = static_cast<double>(b);
-    double c_db = static_cast<double>(c);
-
-    if (!a && !b && !c) {
+    if (a == 0 && b == 0 && c == 0) {
         std::cout << "infinite solutions";
         return;
     }
 
     if (a == 0) {
-        b_db != 0 ? std::cout << -(c_db / b_db) : std::cout << "no solutions";
+        b != 0 ? std::cout << -(static_cast<double>(c) / b) : std::cout << "no solutions";
         return;
     }
 
@@ -23,15 +19,16 @@ void SolveQuadratic(int a, int b, int c) {
         return;
     }
 
-    double discriminant = b_db*b_db - 4*a_db*c_db;
+    double discriminant = static_cast<double>(b) * b - 4.0 * a * c;
 
     if (discriminant > 0) {
-        double x1 = (-b_db - sqrt(discriminant)) / (2 * a_db);
-        double x2 = (-b_db + sqrt(discriminant)) / (2 * a_db);
+        double sqrt_d = std::sqrt(discriminant);
+        double x1 = (-b - sqrt_d) / (2.0 * a);
+        double x2 = (-b + sqrt_d) / (2.0 * a);
         std::cout << std::setprecision(6) << x1 << ' ' << x2;
     }
     else if (discriminant == 0) {
-        double x = -b_db / (2 * a_db);
+        double x = -b / (2.0 * a);
         std::cout << std::setprecision(6) << x;
     }
     else {
