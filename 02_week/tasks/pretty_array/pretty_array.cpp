@@ -8,30 +8,19 @@ void PrintArray(const int* begin, const int* end, const int threshold = 0) {
     }
 
     std::cout << "[";
-    if (begin < end) {
-        for (const int* ptr = begin; ptr < end; ++ptr) {
-            if (threshold && static_cast<int>(ptr - begin) % threshold == 0 && ptr != begin) {
-                std::cout << "...\n ";
-            }
-
-            std::cout << *ptr;
-
-            if (ptr != end - 1) {
-                std::cout << ", ";
-            }
+    for (
+        const int* ptr = begin;
+        begin < end ? ptr < end : ptr > end;
+        begin < end ? ++ptr : --ptr
+    ) {
+        if (threshold && static_cast<int>(ptr - begin) % threshold == 0 && ptr != begin) {
+            std::cout << "...\n ";
         }
-    }
-    else {
-        for (const int* ptr = begin; ptr > end; --ptr) {
-            if (threshold && static_cast<int>(ptr - begin) % threshold == 0 && ptr != begin) {
-                std::cout << "...\n ";
-            }
 
-            std::cout << *ptr;
+        std::cout << *ptr;
 
-            if (ptr != end + 1) {
-                std::cout << ", ";
-            }
+        if (ptr != (begin < end ? end - 1 : end + 1)) {
+            std::cout << ", ";
         }
     }
     std::cout << "]" << std::endl;
