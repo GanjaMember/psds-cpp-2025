@@ -94,10 +94,8 @@ StringView StringView::Substr(size_t begin, size_t len) const {
 }
 
 size_t StringView::Find(char needle, size_t begin) const {
-    for (size_t i = begin; i < m_size; ++i) {
-        if (m_str_ptr[i] == needle) { return i; }
-    }
-    return npos;
+    char str[2] = {needle, '\0'};
+    return Find(str, begin);
 }
 
 size_t StringView::Find(const char* needle, size_t begin) const {
